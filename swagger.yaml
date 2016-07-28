@@ -1,0 +1,65 @@
+swagger: '2.0'
+info:
+  title: Info API
+  description: Stealth Worker API for accessing public data
+  version: "1.0.0"
+host: info.stealthworker.com
+
+schemes:
+  - https
+basePath: /v1
+
+produces:
+  - application/json+vnd.api
+paths:
+  /skills:
+    get:
+      responses:
+        200:
+          description: An array of products
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Profile'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  # /frequently-asked-questions:
+definitions:
+  # FrequentlyAskedQuestion:
+  #   type: object
+  #   description: Published Frequently Asked Questions (published is available in a seperate API).
+  #   properties:
+  #     prompt:
+  #       type: string
+  #       description: Prompt of the frequently asked question, formatted in markdown.
+  #     answer:
+  #       type: string
+  #       description: Answer in text of the frequently asked question, formatted in markdown.
+  #     person_id:
+  #       type: string
+  #       description: Unique identifier representing a specific person
+  Skills:
+    type: object
+    description: Published Skills
+    properties:
+      name:
+        type: string
+        description: First name of the Uber user.
+      description:
+        type: string
+        description: Last name of the Uber user.
+      pictureUrl:
+        type: string
+        description: Picture URL for the skill
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string
